@@ -1,4 +1,58 @@
 package com.rcs.practica.ui
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.*
+import com.rcs.practica.ui.components.AnimationScrollitem
+
+@Composable
+fun AnimatedListScreen() {
+    val items = remember { (1..20).map { "Hello I am card $it" } }
+    val listState = rememberLazyListState()
+
+    val cardHeightDp = 120.dp // altura estimada de cada tarjeta
+    val cardHeightPx = with(LocalDensity.current) { cardHeightDp.toPx() }
+
+    LazyColumn(
+        state = listState,
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(bottom = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        itemsIndexed(items) { index, item ->
+            val layoutInfo = listState.layoutInfo
+            val itemInfo = layoutInfo.visibleItemsInfo.find { it.index == index }
+
+            // Cálculo del scale basado en su posición Y
+            val scale = if (itemInfo != null) {
+                val distanceFromTop = itemInfo.offset.toFloat()
+                val visibleAreaHeight = layoutInfo.viewportEndOffset.toFloat()
+
+// Reducir escala sólo si el ítem está cerca de salir por arriba
+                when {
+                    distanceFromTop < 0 -> 0f // totalmente fuera
+                    distanceFromTop < cardHeightPx -> {
+                        // escalar entre 0f y 1f
+                        (distanceFromTop / cardHeightPx).coerceIn(0f, 1f)
+                    }
+                    else -> 1f // completamente visible
+                }
+            } else 1f
+
+            AnimationScrollitem(
+                title = item,
+                subtitle = "I am subtitle of ${item.takeLast(1)}",
+                scale = scale
+            )
+        }
+    }
+}
 /*funca
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -41,7 +95,7 @@ fun AnimatedListScreen() {
         }
     }
 }
-*/
+*//*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -99,4 +153,4 @@ fun AnimatedListScreen() {
             }
         }
     }
-}
+}*/

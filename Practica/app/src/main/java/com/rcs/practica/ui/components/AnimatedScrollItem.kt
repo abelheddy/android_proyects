@@ -1,4 +1,46 @@
 package com.rcs.practica.ui.components
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.*
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
+
+@Composable
+fun AnimationScrollitem(title: String, subtitle: String, scale: Float) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 24.dp)
+            .scale(scale)
+            .clip(RoundedCornerShape(16.dp)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFB2EBF2))
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(24.dp)
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = title, fontSize = 20.sp)
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = subtitle, fontSize = 14.sp)
+        }
+    }
+}
+
 /*funca
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
@@ -31,7 +73,7 @@ fun AnimatedScrollItem(item: ListItem, visible: Boolean) {
         }
     }
 }*/
-
+/*
 import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.*
@@ -87,4 +129,4 @@ fun AnimatedScrollItem(
             }
         }
     }
-}
+}*/

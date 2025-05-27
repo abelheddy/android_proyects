@@ -10,7 +10,7 @@ data class ListItem(
 )
 
 fun generateSampleItems(): List<ListItem> {
-    return List(20) { i ->
+    return List(40) { i ->
         ListItem(
             id = i,
             title = "Item $i",
