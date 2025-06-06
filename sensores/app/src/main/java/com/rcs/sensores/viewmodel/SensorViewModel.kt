@@ -42,6 +42,13 @@ class SensorViewModel(app: Application) : AndroidViewModel(app), SensorEventList
             // Subir a Firebase
             viewModelScope.launch {
                 firebaseRef.push().setValue(data)
+                    .addOnSuccessListener {
+                        // Log o algo para confirmar que subió bien
+                        println("Dato subido con éxito")
+                    }
+                    .addOnFailureListener { e ->
+                        println("Error subiendo dato: ${e.message}")
+                    }
             }
         }
     }
