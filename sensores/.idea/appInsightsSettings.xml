@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.rcs.sensores" />
+                  <option name="mobileSdkAppId" value="1:401332275827:android:d0ca92804e2cc9a782f806" />
+                  <option name="projectId" value="giro-77b3a" />
+                  <option name="projectNumber" value="401332275827" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
